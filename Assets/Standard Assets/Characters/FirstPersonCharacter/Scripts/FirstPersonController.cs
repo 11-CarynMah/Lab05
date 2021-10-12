@@ -46,6 +46,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public int coinCount;
         public Text coinText;
+
+        public float timeLeft;
+        public int timeRemaining;
+        public Text timerText;
+        private float TimerValue;
+
         // Use this for initialization
         private void Start()
         {
@@ -85,6 +91,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            timeLeft -= Time.deltaTime;
+            timeRemaining = Mathf.FloorToInt(timeLeft % 60);
+            timerText.text = "Timer: " + timeRemaining.ToString();
+
+            if (coinCount == 60)
+            {
+                if (timeLeft <= TimerValue)
+                {
+                    SceneManager.LoadScene("GameWinScene");
+                }
+            }
+
+            else if (timeLeft <= 0)
+            {
+                SceneManager.LoadScene("GameLoseScene");
+            }
         }
 
         public void OnTriggerEnter(Collider other)
