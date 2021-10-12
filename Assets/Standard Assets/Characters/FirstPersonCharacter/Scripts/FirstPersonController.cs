@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -42,6 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        public int coinCount;
+        public Text coinText;
         // Use this for initialization
         private void Start()
         {
@@ -81,6 +84,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "Coin")
+            {
+                coinCount += 10;
+                coinText.GetComponent<Text>().text = "Coin: " + coinCount;
+                Destroy(other.gameObject);
+            }
         }
 
 
