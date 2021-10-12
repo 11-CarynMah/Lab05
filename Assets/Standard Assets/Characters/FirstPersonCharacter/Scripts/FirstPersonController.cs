@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -93,6 +94,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 coinCount += 10;
                 coinText.GetComponent<Text>().text = "Coin: " + coinCount;
                 Destroy(other.gameObject);
+            }
+
+            if(other.gameObject.tag == "Water")
+            {
+                SceneManager.LoadScene("GameLoseScene");
             }
         }
 
