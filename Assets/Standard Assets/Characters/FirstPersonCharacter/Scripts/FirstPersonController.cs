@@ -96,12 +96,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             timeRemaining = Mathf.FloorToInt(timeLeft % 60);
             timerText.text = "Timer: " + timeRemaining.ToString();
 
-            if (coinCount == 60)
+            if (coinCount >= 60)
             {
-                if (timeLeft <= TimerValue)
-                {
                     SceneManager.LoadScene("GameWinScene");
-                }
             }
 
             else if (timeLeft <= 0)
